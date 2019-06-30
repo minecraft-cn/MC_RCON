@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
 	"log"
@@ -23,8 +24,6 @@ func main() {
 
 	flagArgs()
 
-
-
 	c := &rcon.RconClient{
 		ServerAddr: addr,
 		Password:   password,
@@ -44,17 +43,17 @@ func main() {
 		log.Println("login successfully")
 	}
 
-	var cmd string
+	var line = bufio.NewReader(os.Stdin)
 	for {
-		_, err := fmt.Fscanf(os.Stdin, "%s\n", &cmd)
+		line, _, err := line.ReadLine()
 		if err != nil {
 			log.Println(err)
-			os.Exit(1)
+			continue
 		}
 
-		result, err := c.RunCmd(cmd)
+		result, err := c.RunCmd(string(line))
 		if err != nil {
-			log.Printf("run command(%s) failed: %s", cmd, err)
+			log.Printf("run command(%s) failed: %s", line, err)
 			continue
 		}
 		fmt.Println(result)
