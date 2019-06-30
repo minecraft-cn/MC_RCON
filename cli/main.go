@@ -51,6 +51,10 @@ func main() {
 			continue
 		}
 
+		if len(line)==0 {
+			continue
+		}
+
 		result, err := c.RunCmd(string(line))
 		if err != nil {
 			log.Printf("run command(%s) failed: %s", line, err)
