@@ -5,8 +5,9 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"mcRcon/rcon"
 	"os"
+
+	"github.com/minecraft-cn/MC_RCON/rcon"
 )
 
 var (
@@ -51,7 +52,7 @@ func main() {
 			continue
 		}
 
-		if len(line)==0 {
+		if len(line) == 0 {
 			continue
 		}
 
